@@ -13,5 +13,10 @@ https://leetcode.com/problems/linked-list-cycle/
 https://leetcode.com/problems/linked-list-cycle-ii/
 https://leetcode.com/problems/find-the-duplicate-number/
 
-# Tree
+# Trires
+
+https://leetcode.com/problems/implement-trie-prefix-tree/
+https://leetcode.com/problems/design-add-and-search-words-data-structure/
+https://leetcode.com/problems/word-search-ii/
+https://leetcode.com/problems/prefix-and-suffix-search/
 
