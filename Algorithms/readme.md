@@ -20,3 +20,9 @@ https://leetcode.com/problems/design-add-and-search-words-data-structure/
 https://leetcode.com/problems/word-search-ii/
 https://leetcode.com/problems/prefix-and-suffix-search/
 
+# Union Find
+
+https://leetcode.com/problems/redundant-connection/
+https://leetcode.com/problems/accounts-merge/
+https://leetcode.com/problems/longest-consecutive-sequence/
+https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/
