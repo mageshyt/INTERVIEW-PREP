@@ -64,6 +64,13 @@ class MedianFinder:
 
         # if length of the smaller heap is equal to the length of the larger heap (equal size)
         return (-self.small[0] + self.large[0]) / 2
+    def remove(self, num):
+        if num <= -self.small[0]:
+            self.small.remove(-num)
+            heapq.heapify(self.small)
+        else:
+            self.large.remove(num)
+            heapq.heapify(self.large)
 
 print("TESTING MEDIAN FINDER")
 medianFinder = MedianFinder()

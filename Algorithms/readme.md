@@ -2,9 +2,7 @@
 https://leetcode.com/problems/range-sum-query-immutable/
 https://leetcode.com/problems/range-sum-query-2d-immutable/
 https://leetcode.com/problems/find-pivot-index/
-https://leetcode.com/problems/product-of-array-except-self/
-https://leetcode.com/problems/subarray-sum-equals-k/
-
+https://leetcode.com/problems/product-of-array-except-self/ https://leetcode.com/problems/subarray-sum-equals-k/
 # Linked List
 
 https://leetcode.com/problems/middle-of-the-linked-list/
@@ -26,3 +24,9 @@ https://leetcode.com/problems/redundant-connection/
 https://leetcode.com/problems/accounts-merge/
 https://leetcode.com/problems/longest-consecutive-sequence/
 https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/
+
+# HEAP
+
+https://leetcode.com/problems/find-median-from-data-stream/
+https://leetcode.com/problems/sliding-window-median/
+https://leetcode.com/problems/ipo/
