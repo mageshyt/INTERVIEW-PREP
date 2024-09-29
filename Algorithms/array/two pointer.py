@@ -126,3 +126,34 @@ class Solution:
 # Space complexity: O(1)
 
 print(Solution().maxArea([1,8,6,2,5,4,8,3,7])) # 49
+
+
+# 42. Trapping Rain water
+
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        n = len(height)
+        if n == 0:
+            return 0
+        l, r = 0, n-1
+
+        leftMax, rightMax = height[l], height[r]
+
+        res = 0
+        while l < r:
+            # get the max height of left and right
+            leftMax = max(leftMax, height[l])
+            rightMax = max(rightMax, height[r])
+
+            if leftMax < rightMax:
+                # if leftMax is less than rightMax
+                # then we can store water equal to leftMax - height[l]
+
+                res += leftMax - height[l]
+                l += 1
+            else:
+                # if rightMax is less than leftMax
+                # then we can store water equal to rightMax - height[r]
+                res += rightMax - height[r]
+                r -= 1
+        return res
