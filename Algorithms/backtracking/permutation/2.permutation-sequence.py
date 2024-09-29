@@ -35,7 +35,7 @@ class Solution:
             index = k//fact[n-1-i]
             res += nums[index]
             nums.pop(index) # remove the element at INDEX
-            k %= fact[n-1-i] # update k
+            k %= fact[n-1-i] # update k  
 
         return res
 
