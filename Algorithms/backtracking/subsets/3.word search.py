@@ -33,12 +33,16 @@ class Solution:
 
         for row in range(rows):
             for col in range(cols):
-                if dfs(row,col,0):
-                    return True
+                # check if the first letter of the word is in the board
+                if board[row][col]==word[0]:
+                    if dfs(row,col,0):
+                        return True
 
         return False
 
+#  Time complexity: O(n*m*4^s) where n is the number of rows, m is the number of columns, and s is the length of the word
 
+# Space complexity: O(s) where s is the length of the word
 print("TEST CASES")
 print(Solution().wordSearch([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]],"ABCCED")) # return True
 
