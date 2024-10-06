@@ -42,3 +42,13 @@ Solution: https://youtu.be/GBKI9VSKdGg
 
 https://leetcode.com/problems/letter-combinations-of-a-phone-number/
 Solution: https://youtu.be/0snEunUacZY
+
+
+# Permutation
+
+
+
+# Graph (Dikstra)
+https://leetcode.com/problems/network-delay-time/
+https://leetcode.com/problems/swim-in-rising-water/
+https://leetcode.com/problems/path-with-maximum-probability/
