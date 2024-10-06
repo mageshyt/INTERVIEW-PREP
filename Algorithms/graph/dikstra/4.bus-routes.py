@@ -22,6 +22,7 @@ class Solution:
             return 0
         # build the graph stop-[bus no]
 
+        print("test")
         graph=defaultdict(list)
 
         for idx ,route in enumerate(routes):
