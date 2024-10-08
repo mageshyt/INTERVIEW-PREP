@@ -32,7 +32,6 @@ class Solution:
                 if neighbor not in visited: # if the neighbor is not visited
                     new_time = time+ weight
                     heapq.heappush(heap,(new_time,neighbor))
-
             
         return -1 if len(visited) != n else maxTime
 
