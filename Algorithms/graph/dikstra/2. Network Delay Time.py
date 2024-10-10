@@ -44,8 +44,3 @@ n = 4
 k = 2
 sol = Solution()
 print(sol.networkDelayTime(edges,n,k)) # 2
-
-
-
-
-
