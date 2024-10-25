@@ -57,3 +57,10 @@ https://leetcode.com/problems/path-with-maximum-probability/
 # Graph (prims)
 https://leetcode.com/problems/min-cost-to-connect-all-points/
 https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/
+
+# Graph (Topological Sort)
+https://leetcode.com/problems/course-schedule/
+https://leetcode.com/problems/course-schedule-ii/
+https://leetcode.com/problems/course-schedule-iv/
+https://leetcode.com/problems/sort-items-by-groups-respecting-dependencies/
+https://leetcode.com/problems/alien-dictionary/

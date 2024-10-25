@@ -3,7 +3,7 @@ class Solution:
     def letterCombinations(self,digits:str)-> List[str]:
         if len(digits)==0:
             return []
-
+        digits=digits.replace("1","")
         phone={
             '2':'abc',
             '3':'def',
@@ -31,4 +31,4 @@ class Solution:
 # Time complexity: O(4^n)
 # Space complexity: O(n)
 print("TEST CASES")
-print(Solution().letterCombinations("23")) # ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+print(Solution().letterCombinations("123")) # ["ad","ae","af","bd","be","bf","cd","ce","cf"]

@@ -5,7 +5,6 @@ def is_bipartite(graph):
     n = len(graph)
     color = [-1] * n  # -1 means uncolored, 0 and 1 are the two colors
 
-    # We need to check every node because the graph may not be connected
     for start in range(n):
         if color[start] == -1:  # If the node is not yet colored
             # Start a BFS from this node
