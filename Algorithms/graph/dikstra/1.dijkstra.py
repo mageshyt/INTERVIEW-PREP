@@ -13,16 +13,17 @@ def shortestPath(edges, n, src):
 
     # 2. Dijkstra's algorithm
     while heap:
-        dist, node = heapq.heappop(heap)
+        dist,node = heapq.heappop(heap)
         if node in shotest:
             continue
-        # go through all the neighbors of the node
-        for neighbors,weight in adj[node]:
-            if neighbors not in shotest:
-                # new distance will be (dist from src to node) + (weight of the edge)
-                heapq.heappush(heap,(dist+weight,neighbors))
+        shotest[node] = dist
+        for neighbor,weight in adj[node]:
+            if neighbor not in shotest:
+                heapq.heappush(heap,(dist+weight,neighbor))
 
-    return shotest
+
+    return [ shotest[i] if i in shotest else -1 for i in range(n) ]
+
 # Time complexity : O(ElogV) where E is the number of edges and V is the number of vertices
 # Space complexity : O(V+E) where V is the number of vertices and E is the number of edges
 
