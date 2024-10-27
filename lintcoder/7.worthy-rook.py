@@ -35,6 +35,7 @@ def worthy_rook(board: List[List[str]]) -> int:
                 queue.append((i,j,0))
                 break
 
+
     # rook can move only in 4 directions
 
     directions = [(0,1),(0,-1),(1,0),(-1,0)]
