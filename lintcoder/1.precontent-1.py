@@ -28,7 +28,6 @@ print(maximumOr(nums1, k1))  # Output: 57
 # Test for Exercise-2
 nums2 = [3, 2, 4]
 k2 = 2
-
 print(maximumOr(nums2, k2))  # Output: ​⬤
 
 

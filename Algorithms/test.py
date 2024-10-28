@@ -1,23 +1,38 @@
 
-from typing import *
+from typing import List
+from collections import deque
+class Solution:
+    
+    def shortestPath(self, grid: List[List[int]], source: List[int], destination: List[int]) -> int:
+        # code here
 
-def isSubsetPresent(n:int, k: int, a: List[int]) -> bool:
-    # Write your code here.
-    def backTrack(idx,tot):
-        if tot==k:
-            return True
-        if idx >= n or tot > k:
-            return False
+        if grid[0][0] ==0 or grid[destination[0]][destination[1]]==0:
+            return -1
 
-        if backTrack(idx+1,tot+a[idx]):
-            return True
-        
+        n=len(grid)
 
-        if backTrack(idx+1,tot):
-            return True
+        q=deque([(source[0],source[1],1)]) # (x,y,distance)
 
-        return False
+        directions=[(0,1),(0,-1),(1,0),(-1,0),(1,1),(-1,-1),(1,-1),(-1,1)]
 
-    return backTrack(0,0)
+        while q:
+            print(q)
+            x,y,distance=q.popleft()
 
-print(isSubsetPresent(4, 13, [4,3,5,2])) # True
+            # if we reach the end
+            if x==destination[0] and y==destination[1]:
+                return distance
+
+            for dx,dy in directions:
+                new_x,new_y=x+dx,y+dy
+                if 0<=new_x<n and 0<=new_y<n and grid[new_x][new_y]==1:
+                    grid[new_x][new_y]=1
+
+                    q.append((new_x,new_y,distance+1))
+
+        return -1
+
+grid = [[0,0,0],[1,1,0],[1,1,0]]
+source = [0,0]
+destination = [2,2]
+print(Solution().shortestPath(grid,source,destination)) # 4
