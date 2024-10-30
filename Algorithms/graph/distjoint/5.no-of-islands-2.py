@@ -39,20 +39,27 @@ class Solution:
         directions=[(0,1),(0,-1),(1,0),(-1,0)]
 
         uf=UnionFind()
-
-
+        visited=set()
         connectedIslands=0
 
-        for x,y in operators:
-            if (x,y) not in uf.parent:
-                uf.parent[(x,y)]=(x,y)
-                connectedIslands+=1
+
+        for row,col in operators:
+            if (row,col) in visited:
+                res.append(connectedIslands)
+                continue
+
+            visited.add((row,col))
+            connectedIslands+=1
+            parentCell=row*cols+col 
 
             for dx,dy in directions:
-                nx,ny=x+dx,y+dy
-                if (nx,ny) in uf.parent:
-                    if not uf.is_connected((x,y),(nx,ny)):
-                        uf.union((x,y),(nx,ny))
+                new_row,new_col=row+dx,col+dy
+                if 0<=new_row<rows and 0<=new_col<cols and (new_row,new_col) in visited:
+                    # compute the cell number of the parent Node and currentNode
+                    currentNode=new_row*cols+new_col 
+
+                    if not uf.is_connected(parentCell,currentNode):
+                        uf.union(parentCell,currentNode)
                         connectedIslands-=1
 
             res.append(connectedIslands)

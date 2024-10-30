@@ -27,54 +27,110 @@ Explanation: Can't change any 0 to 1, only one island with area = 4.
 
 from collections import deque
 from typing import List
+class UnionFind:
+    def __init__(self) -> None:
+        self.parent = {}
+
+    def find(self, x) -> int:
+        self.parent.setdefault(x, x)
+
+        if x != self.parent[x]:
+            self.parent[x] = self.find(self.parent[x])
+
+        return self.parent[x]
+
+    def union(self, x, y) -> None:
+
+        xParent = self.find(x)
+        yParent = self.find(y)
+
+        if xParent != yParent:
+            self.parent[xParent] = yParent
+
+    def is_connected(self, x, y) -> bool:
+
+        return self.find(x) == self.find(y)
+
 
 class Solution:
     def largestIsland(self, grid: List[List[int]]) -> int:
-        points=[]
         rows,cols=len(grid),len(grid[0])
         maxArea=0
+        directions=[(0,1),(0,-1),(1,0),(-1,0)]
+
+        uf=UnionFind()
+
+
+        def bfs(row ,col):
+            nonlocal maxArea
+            q=deque([(row,col)])
+            visited=set()
+            visited.add((row,col))
+            area=1
+            while q:
+                row,col=q.popleft()
+
+                parentCell=row*cols+col
+
+                for dx,dy in directions:
+                    new_row,new_col=row+dx,col+dy
+                    if 0<=new_row<rows and 0<=new_col<cols and grid[new_row][new_col]==1 and (new_row,new_col) not in visited:
+                        newCell=new_row*cols+new_col
+                        if not uf.is_connected(parentCell,newCell):
+                            uf.union(parentCell,newCell)
+                            area+=1
+                            visited.add((new_row,new_col))
+                            q.append((new_row,new_col))
+
+            maxArea=max(maxArea,area)
+            return area
+
+        areaMap={}
+        points=[]
+
 
         for row in range(rows):
             for col in range(cols):
-                if grid[row][col] == 0:
+                if grid[row][col]==1:
+                    area=bfs(row,col)
+                    print("AREA",area,row*cols+col)
+                    maxArea=max(maxArea,area)
+                    parent=uf.find(row*cols+col)
+                    areaMap[parent]=max(areaMap.get(parent,0),area)
+
+                else:
                     points.append((row,col))
 
-        if not points:
-            return rows*cols
-
-
-        def bfs(row,col):
-            visited=set()
-            q=deque([(row,col)])
-            area=0
-
-            while q:
-                r,c=q.popleft()
-
-                if (r,c) in visited:
-                    continue
-
-                visited.add((r,c))
-                area+=1
-
-                for dr,dc in [(0,1),(0,-1),(1,0),(-1,0)]:
-                    nr,nc=r+dr,c+dc
-
-                    if 0<=nr<rows and 0<=nc<cols and grid[nr][nc]==1:
-                        q.append((nr,nc))
-
-            return area
-
-        
+        print(areaMap)       
         for row,col in points:
-            grid[row][col]=1
-            maxArea=max(maxArea,bfs(row,col))
-            grid[row][col]=0
+            currentArea=1
 
+            visited=set()
+            for dx,dy in directions:
+                new_row,new_col=row+dx,col+dy
+
+                if 0<=new_row<rows and 0<=new_col<cols and grid[new_row][new_col]==1:
+                    newCell=new_row*cols+new_col
+
+                    parent=uf.find(newCell)
+
+                    if parent not in visited:
+                        visited.add(parent)
+                        currentArea+=areaMap[parent]
+
+
+
+
+
+            maxArea=max(maxArea,currentArea)
 
         return maxArea
 
-grid = [[1,0],[1,1]]
+
+
+
+# grid = [[1,1,0,1,1],[1,1,0,1,1],[0,0,1,0,0],[0,0,1,0,0],[1,1,0,1,1]]
+grid=[[1,1],[0,1]]
 
 print(Solution().largestIsland(grid))
 
