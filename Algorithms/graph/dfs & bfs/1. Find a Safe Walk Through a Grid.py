@@ -34,18 +34,12 @@ class Solution:
 
         dp=[[0]*cols for _ in range(rows)]
         dp[0][0]=health-grid[0][0]
-
-        queue=deque([(0,0,dp[0][0])]) # (row,col,health)
-
-        while queue:
-            row,col,health=queue.popleft()
+queue=deque([(0,0,dp[0][0])]) # (row,col,health) while queue: row,col,health=queue.popleft()
 
             if (row,col)==(rows-1,cols-1) and health>0:
                 return True
 
-            for dx,dy in directions:
-                rowOffset,colOffset=row+dx,col+dy
-
+            for dx,dy in directions: rowOffset,colOffset=row+dx,col+dy
                 if rowOffset<0 or rowOffset>=rows or colOffset<0 or colOffset>=cols:
                     continue
 
