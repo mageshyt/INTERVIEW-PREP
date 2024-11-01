@@ -25,32 +25,38 @@ The final cell can be reached safely by walking along the gray cells below.
 
 """
 from typing import List
-from collections import deque
+import heapq
+
 class Solution:
+    # time complexity O(m*n) | space complexity O(m*n)
     def findSafeWalk(self, grid: List[List[int]], health: int) -> bool:
-        rows,cols=len(grid),len(grid[0])
-        directions=[(0,1),(0,-1),(1,0),(-1,0)]
+        rows, cols = len(grid), len(grid[0])
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
+         
+        heap = [(-health + (1 if grid[0][0] == 1 else 0), 0, 0)]
+        visited = set((0, 0))
 
-        dp=[[0]*cols for _ in range(rows)]
-        dp[0][0]=health-grid[0][0]
-queue=deque([(0,0,dp[0][0])]) # (row,col,health) while queue: row,col,health=queue.popleft()
+        while heap:
+            curr_health, x, y = heapq.heappop(heap)
+            curr_health = -curr_health  # convert back to positive health value for comparison
 
-            if (row,col)==(rows-1,cols-1) and health>0:
+            if x == rows - 1 and y == cols - 1 and curr_health > 0:
                 return True
 
-            for dx,dy in directions: rowOffset,colOffset=row+dx,col+dy
-                if rowOffset<0 or rowOffset>=rows or colOffset<0 or colOffset>=cols:
-                    continue
-
-                newHealth=health-grid[rowOffset][colOffset]
-
-                if newHealth<=0:
-                    continue
-
-
-                if newHealth>dp[rowOffset][colOffset]:
-                    dp[rowOffset][colOffset]=newHealth
-                    queue.append((rowOffset,colOffset,newHealth))
+            for dx, dy in directions:
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < rows and 0 <= ny < cols and (nx, ny) not in visited:
+                    visited.add((nx, ny))
+                    next_health = curr_health - 1 if grid[nx][ny] == 1 else curr_health
+                    if next_health > 0:  # Only push if there's health remaining
+                        heapq.heappush(heap, (-next_health, nx, ny))
 
         return False
+
+sol = Solution()
+print(sol.findSafeWalk([[0,1,0,0,0],[0,1,0,1,0],[0,0,0,1,0]],1)) # True
+print(sol.findSafeWalk([[0,1,0,0,0],[0,1,0,1,0],[0,0,0,1,0]],2)) # True
+print(sol.findSafeWalk([[1,1,1],[1,0,1],[1,1,1]]
+,5)) # True 
+print(sol.findSafeWalk([[1,1,1,1]],4)) # False
