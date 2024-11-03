@@ -1,5 +1,6 @@
 class Solution:
-    # TOP DOWN 
+    # TOP DOWN  
+    # Time : O(n) | Space : O(n) 
     def climbingStair(self,n:int)->int:
         memo={}
 
@@ -15,7 +16,7 @@ class Solution:
             return memo[n]
 
         return dfs(n)
-
+    # BOTTOM UP 
     def  climbStairs(self,n):
         dp=[0]*(n+1)
         dp[0]=1
