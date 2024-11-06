@@ -53,7 +53,29 @@ class Solution:
             bsf(node)
 
         return minCycle if minCycle!=float('inf') else -1
+    # dfs solution 2
+    def findShortestCycle(self, n: int, edges: List[List[int]]) :
+        graph=defaultdict(list)
+        for u,v in edges:
+            graph[u].append(v)
+            graph[v].append(u)
+        minCycle=float('inf')
 
+        def dfs(node, parent, distance):
+            nonlocal minCycle
+            for neighbor in graph[node]:
+                if neighbor!=parent:
+                    if neighbor in distance:
+                        minCycle=min(minCycle,distance[node]+distance[neighbor]+1)
+                    else:
+                        distance[neighbor]=distance[node]+1
+                        dfs(neighbor,node,distance)
+
+        for node in range(n):
+            dfs(node,-1,{node:0})
+
+
+        return minCycle if minCycle!=float('inf') else -1    
 
 # Time complexity: O(N+E)
 print("TESTCASES")

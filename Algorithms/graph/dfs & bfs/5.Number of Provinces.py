@@ -61,7 +61,7 @@ class Solution:
             for j in range(len(isConnected[0])):
                 if isConnected[i][j] == 1:
                     adj[i].append(j)
-
+        print(adj)
         visited = set()
 
         def dfs(node):
