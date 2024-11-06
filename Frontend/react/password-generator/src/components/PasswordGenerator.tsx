@@ -135,17 +135,17 @@ const PasswordGenerator = () => {
 
         <div className='flex flex-wrap justify-evenly items-start gap-4'>
           {
-            characteristics.map((characteristics,idx)=>(
-            <div
-              key={idx}
-              className="flex items-center space-x-2">
-              
-              <input
-                type="checkbox"
-                className="size-4"
-                onChange={(e) => handleCharacteristicsChange(e, characteristics.value)}
-              />
-              <label className="text-white text-xl font-semibold">{characteristics.label}</label>
+            characteristics.map((characteristics, idx) => (
+              <div
+                key={idx}
+                className="flex items-center space-x-2">
+
+                <input
+                  type="checkbox"
+                  className="size-4"
+                  onChange={(e) => handleCharacteristicsChange(e, characteristics.value)}
+                />
+                <label className="text-white text-xl font-semibold">{characteristics.label}</label>
 
               </div>
             ))
