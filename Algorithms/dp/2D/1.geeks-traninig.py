@@ -66,5 +66,3 @@ class Solution:
 
 print(Solution().maximumPoints([[1,2,5],[3,1,1],[3,3,3]],3)) # 11
 print(Solution().maximumPoints2([[1,2,5],[3,1,1],[3,3,3]],3)) # 11
-
-
