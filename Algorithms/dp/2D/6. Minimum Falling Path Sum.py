@@ -31,7 +31,7 @@ class Solution:
             if (row,col) in dp:
                 return dp[(row,col)]
 
-           minCost = float('inf')
+            minCost = float('inf')
 
             for r,c in direction:
                 newRow,newCol = row+r,col+c
@@ -63,6 +63,3 @@ class Solution:
         return min(dp[0])
 print(Solution().minFallingPathSum([[2,1,3],[6,5,4],[7,8,9]])) # 12
 print(Solution().minFallingPathSum2([[2,1,3],[6,5,4],[7,8,9]])) # 12
-
-
-        
