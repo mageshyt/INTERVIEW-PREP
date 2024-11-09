@@ -44,22 +44,48 @@ class Solution:
 
         return min(dfs(0,col) for col in range(cols))
     # BOTTOM UP
+    # Time: O(n^2) | Space: O(n^2)
     def minFallingPathSum2(self, matrix: List[List[int]]) -> int:
         rows,cols=len(matrix),len(matrix[0])
         dp=[[float('inf') for _ in range(cols)] for _ in range(rows)]
 
         for col in range(cols):
-            dp[rows-1][col]=matrix[rows-1][col]
+            dp[0][col]=matrix[0][col]
         
-        direction = [(1,0),(1,1),(1,-1)]
-
-        for row in range(rows-2,-1,-1):
+        for row in range(1,rows):
             for col in range(cols):
-                for r,c in direction:
-                    newRow,newCol = row+r,col+c
-                    if 0 <= newRow < rows and 0 <= newCol < cols:
-                        dp[row][col]=min(dp[row][col],matrix[row][col]+dp[newRow][newCol])
+                up=matrix[row][col] + dp[row-1][col]
+                left=right=float('inf')
+                if col > 0:
+                    left=matrix[row][col] + dp[row-1][col-1]
+                if col < cols-1:
+                    right=matrix[row][col] + dp[row-1][col+1]
 
-        return min(dp[0])
+                dp[row][col]=min(up,left,right)
+
+
+
+        return min(dp[-1])
+
+    # SPACE OPTIMIZED 
+    # Time: O(n^2) | Space: O(1)
+    def minFallingPathSum3(self, matrix: List[List[int]]) -> int:
+        rows,cols=len(matrix),len(matrix[0])
+
+        for row in range(1,rows):
+            for col in range(cols):
+                up=matrix[row][col] + matrix[row-1][col]
+                left=right=float('inf')
+                if col > 0:
+                    left=matrix[row][col] + matrix[row-1][col-1]
+                if col < cols-1:
+                    right=matrix[row][col] + matrix[row-1][col+1]
+
+                matrix[row][col]=min(up,left,right)
+
+        return min(matrix[-1])
+
+
 print(Solution().minFallingPathSum([[2,1,3],[6,5,4],[7,8,9]])) # 12
 print(Solution().minFallingPathSum2([[2,1,3],[6,5,4],[7,8,9]])) # 12
+print(Solution().minFallingPathSum3([[2,1,3],[6,5,4],[7,8,9]])) # 12
