@@ -60,6 +60,34 @@ class Solution:
                 dp[i][target] = take or notTake
 
         return dp[n-1][target]
+    # SPACE OPTIMIZED
+    # Time: o(n*target) | Space: O(target)
+
+    def isSubsetSum3(self,arr,k):
+        prev=[False] * (k+1)
+
+        if arr[0] <= k:
+            prev[arr[0]] = True
+
+
+        for i in range(1,len(arr)):
+            curr=[False] * (k+1)
+            for target in range(1,k+1):
+                take=False
+                notTake= prev[target]
+                if arr[i] <= target:
+                    take = prev[target-arr[i]]
+
+                curr[target] = take or notTake
+
+            prev = curr
+        return prev[k]
+
+
+
+
+
+
 
 
 print(Solution().isSubsetSum([3, 34, 4, 12, 5, 2],9)) # True
@@ -72,3 +100,4 @@ target = int(ip.readline().strip())
 
 print(Solution().isSubsetSum(nums,target)) # True
 print(Solution().isSubsetSum2(nums,target)) # True
+print(Solution().isSubsetSum3(nums,target)) # True
