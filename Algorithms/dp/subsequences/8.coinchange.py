@@ -44,6 +44,8 @@ class Solution:
                 take=dfs(amt-coins[index],index) + 1
 
             notTake=dfs(amt,index+1)
+
+            dp[(amt,index)]=min(take,notTake) 
             return dp[(amt,index)]
 
 
