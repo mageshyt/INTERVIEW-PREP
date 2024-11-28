@@ -59,6 +59,7 @@ class Solution:
         return 0
 
     # TOP DOWN MEMOIZATION
+    # Time: O(n*m) | Space: O(n*m) + O(n) + O(m)
     def longestCommonSubsequence(self, s1: str, s2: str) -> int:
         dp={}
 
@@ -83,6 +84,42 @@ class Solution:
 
         return dfs(len(s1)-1,len(s2)-1)
 
+    # BOTTOM UP TABULATION
+    # Time: O(n*m) | Space: O(n*m)
+
+    def longestCommonSubsequence2(self, s1: str, s2: str) -> int:
+        n,m=len(s1),len(s2)
+        dp=[[0 for _ in range(m+1)] for _ in range(n+1)]
+
+        for i in range(1,n+1):  
+            for j in range(1,m+1):
+                if s1[i-1] == s2[j-1]:
+                    dp[i][j] = 1 + dp[i-1][j-1]
+                else:
+                    dp[i][j]=max(dp[i-1][j],dp[i][j-1])
+
+
+  
+        return dp[n][m]
+
+    # SPACE OPTIMIZED BOTTOM UP TABULATION
+    # Time: O(n*m) | Space: O(m)
+    def longestCommonSubsequence3(self, s1: str, s2: str) -> int:
+        n,m=len(s1),len(s2)
+        prev=[0 for _ in range(m+1)]
+        curr=[0 for _ in range(m+1)]
+
+        for i in range(1,n+1):
+            for j in range(1,m+1):
+                if s1[i-1] == s2[j-1]:
+                    curr[j] = 1 + prev[j-1]
+                else:
+                    curr[j]=max(prev[j],curr[j-1])
+
+            prev=curr.copy()
+
+        return prev[m]
+
 
 
 
@@ -94,3 +131,7 @@ print(s.lcs("abc", "abc")) # 3
 print("===========TOP DOWN MEMOIZATION============")
 print(s.longestCommonSubsequence("abc", "def")) # 0
 print(s.longestCommonSubsequence("abcde", "ace")) # 3
+
+print("===========BOTTOM UP ============")
+print(s.longestCommonSubsequence2("abc", "def")) # 0
+print(s.longestCommonSubsequence2("abcde", "ace")) # 3
