@@ -61,9 +61,10 @@ class Solution:
 
         while heap:
             time,row,col = heapq.heappop(heap)
-
             if row == rows-1 and col == cols-1:
+                print(time,row,col)
                 minTime = min(minTime,time)
+
                 continue
 
             if (row,col) in visited:
