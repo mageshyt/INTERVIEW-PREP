@@ -10,6 +10,7 @@ class Solution:
         if m[0][0]==1:
             self.dfs(0,0,m,n,visited,ans,'')
 
+
         return ans
 
 
@@ -40,14 +41,16 @@ class Solution:
         elif dx==-1 and dy==0:
             return 'U'
 
-    
-
-
-
-
 # Time complexity: O(4^(n^2))
 # Space complexity: O(n^2)
 
 print("TEST CASE")
 
 print(Solution().findPath([[1,1],[1,1]],2)) # ['DDRR', 'DRDDRR', 'RRDD', 'DRDRRR']
+
+print(Solution().findPath([
+    [1,0,0,0],
+    [1,1,0,1],
+    [0,1,0,0],
+    [1,1,1,1],
+],4))
