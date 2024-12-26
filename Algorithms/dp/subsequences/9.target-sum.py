@@ -4,30 +4,52 @@ class Solution:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
         dp={} # (index,target) -> count
 
+        total=sum(nums)
+
+        if total - target < 0 or (total - target) % 2 != 0:
+            return 0
+
+
+        newTarget=(total-target)//2
+
         def dfs(idx,target):
-            if idx == 0:
-                return 1 if target == 0 else 0
+            if  idx ==0:
+                # case 1 : target == 0  or nums[0] == 0
+                if target == 0 or target == nums[0]:
+                    return 1
+
+                if target ==0 and nums[0] ==0:
+                    return 2 
+
+                return 0
 
             if (idx,target) in dp:
                 return dp[(idx,target)]
 
 
-            add=dfs(idx-1,target-nums[idx]) # ADD
-            subtract=dfs(idx-1,target+nums[idx])
+            take=0
+            if nums[idx] <= target:
+                take=dfs(idx-1,target-nums[idx])
 
-            dp[(idx,target)]=add+subtract
+            notTake=dfs(idx-1,target)
+
+
+            dp[(idx,target)]=take+notTake
+
 
             return dp[(idx,target)]
 
 
-        return dfs(len(nums)-1,target)
 
-    # BOTTOM UP
+        return dfs(len(nums)-1,newTarget)
+s=Solution()
 
-    def findTargetSumWays(self, nums: List[int], target: int) -> int:
-        dp=[[0]*(target+1) for _ in range(len(nums))]
+print(s.findTargetSumWays([2,2,2],2)) # 3
 
-        # FILL BASE CASE
+ 
 
-        pass
+                
+
+            
+
 
